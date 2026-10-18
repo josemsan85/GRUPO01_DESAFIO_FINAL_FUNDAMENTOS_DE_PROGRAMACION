@@ -38,8 +38,43 @@ def validar_asunto(asunto):
     return True
 
 
+def dias_del_mes(mes, anio):
+    """Devuelve cuantos dias tiene un mes (considera los años bisiestos)."""
+    if mes == 2:
+        if (anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0:
+            return 29
+        return 28
+    if mes == 4 or mes == 6 or mes == 9 or mes == 11:
+        return 30
+    return 31
+
+
 def validar_fecha(fecha):
-    # TODO: formato DD/MM/AAAA, dia y mes en rango valido
+    """Formato DD/MM/AAAA con dia, mes y año en un rango valido."""
+    partes = fecha.split("/")
+    if len(partes) != 3:
+        return False
+
+    dia_texto = partes[0]
+    mes_texto = partes[1]
+    anio_texto = partes[2]
+
+    # Formato exacto: 2 digitos para dia y mes, 4 digitos para el año
+    if len(dia_texto) != 2 or len(mes_texto) != 2 or len(anio_texto) != 4:
+        return False
+    if not (dia_texto.isdigit() and mes_texto.isdigit() and anio_texto.isdigit()):
+        return False
+
+    dia = int(dia_texto)
+    mes = int(mes_texto)
+    anio = int(anio_texto)
+
+    if anio < 1900:
+        return False
+    if mes < 1 or mes > 12:
+        return False
+    if dia < 1 or dia > dias_del_mes(mes, anio):
+        return False
     return True
 
 
