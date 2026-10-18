@@ -1,9 +1,8 @@
-"""Validaciones de los datos de un expediente.
 
-Cada funcion recibe un texto (str) y devuelve True si el dato es valido
-o False si no lo es. Solo se usan metodos de cadenas: len, strip, isdigit,
-isalpha, split y el operador in.
-"""
+
+def validar_no_vacio(texto):
+    """Un campo no puede estar vacio ni tener solo espacios."""
+    return len(texto.strip()) > 0
 
 
 def validar_dni(dni):
@@ -12,7 +11,16 @@ def validar_dni(dni):
 
 
 def validar_nombre(nombre):
-    # TODO: no vacio, solo letras y espacios, minimo 3 caracteres
+    """Nombre no vacio, minimo 3 caracteres, solo letras y espacios."""
+    nombre = nombre.strip()
+    if not validar_no_vacio(nombre):
+        return False
+    if len(nombre) < 3:
+        return False
+    for caracter in nombre:
+        # isalpha() acepta tildes y la ñ; ademas dejamos pasar el espacio
+        if not (caracter.isalpha() or caracter == " "):
+            return False
     return True
 
 
