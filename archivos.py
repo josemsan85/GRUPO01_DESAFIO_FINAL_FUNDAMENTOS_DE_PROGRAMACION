@@ -11,13 +11,13 @@ asuntos = ["No me carga","No me viene","No me llama","No me paga","No me cancela
 
 fechas  = ["01/10/2026", "02/10/2026","03/10/2026","04/10/2026","05/10/2026","06/10/2026","07/10/2026" ]
 archivo =""
-ruta = r"C:\miArchivo.txt"
+ruta = r"D:\Nueva carpeta\miArchivo.txt"
 def guardar_datos(ruta, codigos, dnis, nombres, asuntos, fechas):
     # TODO (YNUMA): escribir un expediente por linea, separado por "|"
 
     archivo = open ("miArchivo.txt", "w")
     with open (ruta, "w", encoding="utf-8") as archivo: 
-        archivo.write("el delegampi \n")
+        archivo.write("el delegampi, el terror de las enfermeras\n")
 
         for i in range(0, len (fechas)):
             archivo.write(codigos[i] + "|" + dnis[i] + "|" + nombres[i] + "|" + asuntos[i] + "|" + fechas[i] + "\n")
@@ -26,7 +26,7 @@ def guardar_datos(ruta, codigos, dnis, nombres, asuntos, fechas):
     # Ej: EXP-001|12345678|Ana Perez|Solicitud|10/10/2026
 
 
-guardar_datos(ruta, codigos, dnis, nombres, asuntos, fechas)
+#guardar_datos(ruta, codigos, dnis, nombres, asuntos, fechas)
 
 
 def cargar_datos(ruta):
@@ -43,8 +43,8 @@ def cargar_datos(ruta):
 
 
     except FileNotFoundError: 
-        pass
-        print("est no esxiste")
+        
+        return [],[],[],[],[]
 
 
 print (cargar_datos(ruta))
