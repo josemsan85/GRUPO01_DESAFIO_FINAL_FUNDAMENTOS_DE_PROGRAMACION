@@ -1,10 +1,3 @@
-"""Registro de expedientes.
-
-Los datos se guardan en 5 listas paralelas: la posicion i de cada lista
-corresponde al mismo expediente (codigos[i], dnis[i], nombres[i], ...).
-"""
-
-
 def generar_codigo(codigos):
     """Genera un codigo unico con el formato EXP-001, EXP-002, EXP-003...
 
@@ -27,14 +20,38 @@ def generar_codigo(codigos):
 
 def registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
                          dni, nombre, asunto, fecha):
-    # TODO: generar el codigo, hacer append en las 5 listas
-    # y devolver el codigo generado.
-    # La validacion NO se hace aqui, la hace main.py antes de llamar.
-    return "EXP-001"
+    """Genera el codigo, agrega el expediente en las 5 listas y lo devuelve.
+
+    La validacion NO se hace aqui: la hace main.py (con validaciones.py)
+    antes de llamar a esta funcion.
+    """
+    codigo = generar_codigo(codigos)
+
+    # Los 5 append se hacen juntos para que las listas nunca se desalineen
+    codigos.append(codigo)
+    dnis.append(dni)
+    nombres.append(nombre)
+    asuntos.append(asunto)
+    fechas.append(fecha)
+
+    return codigo
 
 
 if __name__ == "__main__":
     # Pruebas rapidas de este modulo (python registro.py)
+    codigos, dnis, nombres, asuntos, fechas = [], [], [], [], []
+
+    cod1 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+                                "12345678", "Ana Perez", "Solicitud", "10/10/2026")
+    cod2 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+                                "87654321", "Luis Rojas", "Reclamo", "11/10/2026")
+    print("Codigos generados:", cod1, cod2)
+    print(codigos)
+    print(dnis)
+    print(nombres)
+    print(asuntos)
+    print(fechas)
+
+    # El codigo siempre sigue al numero mas alto, aunque la lista este desordenada
     print("Con lista desordenada:", generar_codigo(["EXP-005", "EXP-002"]))  # EXP-006
     print("Con lista vacia:", generar_codigo([]))                            # EXP-001
-
