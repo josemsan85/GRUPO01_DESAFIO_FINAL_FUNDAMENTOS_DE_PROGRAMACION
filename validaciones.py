@@ -1,5 +1,3 @@
-
-
 def validar_no_vacio(texto):
     """Un campo no puede estar vacio ni tener solo espacios."""
     return len(texto.strip()) > 0
@@ -25,7 +23,18 @@ def validar_nombre(nombre):
 
 
 def validar_asunto(asunto):
-    # TODO: no vacio, longitud minima, sin el simbolo "|"
+    """Asunto no vacio, de minimo 5 caracteres y sin el simbolo '|'.
+
+    El simbolo '|' no se permite porque el archivo de datos usa '|'
+    para separar los campos de cada expediente.
+    """
+    asunto = asunto.strip()
+    if not validar_no_vacio(asunto):
+        return False
+    if len(asunto) < 5:
+        return False
+    if "|" in asunto:
+        return False
     return True
 
 
