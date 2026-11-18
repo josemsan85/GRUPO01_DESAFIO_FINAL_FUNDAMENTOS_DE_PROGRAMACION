@@ -5,7 +5,8 @@ from registro import registrar_expediente
 from busqueda_orden import buscar_por_codigo, ordenar_por_codigo
 from archivos import guardar_datos, cargar_datos
 CARPETA = os.path.dirname(os.path.abspath(__file__))
-RUTA_ARCHIVO = os.path.join(CARPETA, "datos", "expedientes.txt")
+RUTA_ARCHIVO = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "datos", "expedientes.txt")
 def mostrar_menu():
     print("\n===== MESA DE PARTES DIGITAL =====")
     print("1. Registrar expediente")

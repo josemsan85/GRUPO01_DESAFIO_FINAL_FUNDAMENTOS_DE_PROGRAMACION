@@ -1,20 +1,55 @@
-codigos = ["EXP-003", "EXP-001", "EXP-005", "EXP-002", "EXP-004",
-           "EXP-007", "EXP-006"]
- 
-dnis = ["70589123", "72345678", "71234569", "48123987", "45678912",
-        "73456789", "49876543"]
- 
-nombres = ["Luis Sera", "Juan Perez", "Carlos Manrique", "Maria Fernandez",
-           "Ana Cordero", "Jorge Chabelo", "Rosa Bartra"]
- 
-asuntos = ["Reclamo por cobro", "Solicitud de licencia", "Queja por demora",
-           "Constancia de residencia", "Permiso de evento",
-           "Reclamo de arbitrios", "Solicitud de copia"]
- 
-fechas = ["03/10/2026", "01/10/2026", "05/10/2026", "02/10/2026",
-          "04/10/2026", "07/10/2026", "06/10/2026"]
- 
-# Datos INVALIDOS a proposito, para probar validaciones.py
-dnis_invalidos = ["123", "1234567a", "123456789", ""]
-fechas_invalidas = ["31/04/2026", "5/3/2026", "10-10-2026", ""]
-asuntos_invalidos = ["Hola", "Reclamo | urgente", " "]
+import os
+import random
+CANTIDAD = 20
+lista_nombres = ["Juan Carlos", "Maria Alejandra", "Luis Alberto", "Ana Sofia",
+                 "Carlos Enrique", "Rosa Elena", "Jorge Luis", "Lucia Beatriz",
+                 "Miguel Angel", "Carmen Rosa"]
+
+lista_ape_paterno = ["Perez", "Quispe", "Sanchez", "Huaman", "Ramos",
+                     "Flores", "Castillo", "Vargas", "Romero", "Diaz"]
+
+lista_asuntos = ["Solicitud de constancia de estudios", "Reclamo por cobro indebido",
+                 "Solicitud de licencia", "Pedido de copia certificada",
+                 "Reclamo por demora en tramite", "Solicitud de reincorporacion",
+                 "Pedido de informacion publica", "Solicitud de beca",
+                 "Rectificacion de datos personales", "Solicitud de convalidacion"]
+
+CARPETA = os.path.dirname(os.path.abspath(__file__))
+RUTA_ARCHIVO = os.path.join(CARPETA, "datos", "expedientes.txt")
+def generar_dni():
+    """Devuelve un DNI ficticio de 8 digitos."""
+    return str(random.randint(10000000, 79999999))
+def generar_fecha():
+    """Devuelve una fecha valida entre agosto y octubre de 2026 (DD/MM/AAAA)."""
+    dia = random.randint(1, 28)
+    mes = random.randint(8, 10)
+    return str(dia).zfill(2) + "/" + str(mes).zfill(2) + "/2026"
+def generar_datos():
+    """Crea las 5 listas con CANTIDAD expedientes ficticios."""
+    codigos = []
+    dnis = []
+    nombres = []
+    asuntos = []
+    fechas = []
+    # Los numeros de codigo salen desordenados a proposito,
+    # asi en la demo se nota la opcion "Ordenar por codigo".
+    numeros = list(range(1, CANTIDAD + 1))
+    random.shuffle(numeros)
+
+    for numero in numeros:
+        codigos.append("EXP-" + str(numero).zfill(3))
+        dnis.append(generar_dni())
+        primer_nombre = random.choice(lista_nombres).split(" ")[0]
+        nombres.append(primer_nombre + " " + random.choice(lista_ape_paterno))
+        asuntos.append(random.choice(lista_asuntos))
+        fechas.append(generar_fecha())
+
+    return codigos, dnis, nombres, asuntos, fechas
+
+if __name__ == "__main__":
+    from archivos import guardar_datos
+
+    random.seed(2026)  # misma salida cada vez que se ejecuta
+    codigos, dnis, nombres, asuntos, fechas = generar_datos()
+    guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres, asuntos, fechas)
+    print("Se generaron", len(codigos), "expedientes en", RUTA_ARCHIVO)
