@@ -30,7 +30,7 @@ class Estados(Enum):
     dni =2
     estado = 3
 
-tiposAtaque = Estados.escudo
+#tiposAtaque = Estados.escudo
 
 #if tiposAtaque == Estados.escudo:
 print("estas con un escudo")
