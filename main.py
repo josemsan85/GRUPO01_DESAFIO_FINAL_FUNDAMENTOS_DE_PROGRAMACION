@@ -5,6 +5,7 @@ from registro import registrar_expediente
 from busqueda_orden import buscar_por_codigo, ordenar_por_codigo
 from archivos import guardar_datos, cargar_datos
 #nuevo Commitsssss
+#otro nuevoComiits 22:22
 #<<<<<<< HEAD
 
 #nuevo inicio de nuevo 
