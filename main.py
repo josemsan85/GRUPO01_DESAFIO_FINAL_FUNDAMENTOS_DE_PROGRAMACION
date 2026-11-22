@@ -4,7 +4,7 @@ import os
 import tkinter as tk
 from tkinter import ttk 
 from enum import Enum
-
+#from datos datos datos datos
 from validaciones import (validar_dni, validar_nombre,
                           validar_asunto, validar_fecha)
 from registro import registrar_expediente
