@@ -3,9 +3,10 @@ from validaciones import (validar_dni, validar_nombre,
                           validar_asunto, validar_fecha)
 from registro import registrar_expediente
 from busqueda_orden import buscar_por_codigo, ordenar_por_codigo
-from archivos import guardar_datos, cargar_datos
+from archivos import guardar_datos, cargar_datos 
 #nuevo Commitsssss
 #otro nuevoComiits 22:22
+##otr nuievo comits 22:29
 #<<<<<<< HEAD
 
 #nuevo inicio de nuevo 
