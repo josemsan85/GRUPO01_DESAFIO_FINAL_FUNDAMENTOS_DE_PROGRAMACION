@@ -1,4 +1,10 @@
 import os
+#comiteado a las 22:34
+import os
+import tkinter as tk
+from tkinter import ttk 
+from enum import Enum
+
 from validaciones import (validar_dni, validar_nombre,
                           validar_asunto, validar_fecha)
 from registro import registrar_expediente
