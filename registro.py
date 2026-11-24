@@ -1,57 +1,46 @@
+# Estados posibles de un expediente
+ESTADOS = ["Pendiente", "En proceso", "Atendido", "Rechazado"]
+
+
 def generar_codigo(codigos):
-    """Genera un codigo unico con el formato EXP-001, EXP-002, EXP-003...
+    """Genera un codigo unico: EXP-001, EXP-002, EXP-003...
 
-    Busca el numero mas alto que ya existe en la lista y le suma 1.
-    Asi el codigo nuevo nunca se repite, aunque la lista este desordenada
-    o se haya cargado desde el archivo.
+    Empieza con (cantidad de expedientes + 1). Si ese codigo ya existe,
+    sigue subiendo de uno en uno hasta encontrar uno libre.
     """
-    mayor = 0
-    for codigo in codigos:
-        numero_texto = codigo[4:]          # "EXP-007"[4:] -> "007"
-        if numero_texto.isdigit():         # ignora codigos mal formados
-            numero = int(numero_texto)
-            if numero > mayor:
-                mayor = numero
-
-    nuevo = mayor + 1
+    numero = len(codigos) + 1
     # zfill(3) rellena con ceros a la izquierda: 7 -> "007"
-    return "EXP-" + str(nuevo).zfill(3)
+    while "EXP-" + str(numero).zfill(3) in codigos:
+        numero = numero + 1
+    return "EXP-" + str(numero).zfill(3)
 
 
-def registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+def registrar_expediente(codigos, dnis, nombres, asuntos, fechas, estados,
                          dni, nombre, asunto, fecha):
-    """Genera el codigo, agrega el expediente en las 5 listas y lo devuelve.
+    """Crea el codigo, guarda el expediente en las 6 listas y devuelve el codigo.
 
-    La validacion NO se hace aqui: la hace main.py (con validaciones.py)
-    antes de llamar a esta funcion.
+    Todo expediente nuevo empieza con estado "Pendiente".
+    Los datos ya vienen validados desde main.py.
     """
     codigo = generar_codigo(codigos)
-
-    # Los 5 append se hacen juntos para que las listas nunca se desalineen
     codigos.append(codigo)
     dnis.append(dni)
     nombres.append(nombre)
     asuntos.append(asunto)
     fechas.append(fecha)
-
+    estados.append(ESTADOS[0])
     return codigo
 
 
 if __name__ == "__main__":
-    # Pruebas rapidas de este modulo (python registro.py)
-    codigos, dnis, nombres, asuntos, fechas = [], [], [], [], []
-
-    cod1 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+    # Pruebas rapidas de este archivo (python registro.py)
+    codigos, dnis, nombres, asuntos, fechas, estados = [], [], [], [], [], []
+    cod1 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas, estados,
                                 "12345678", "Ana Perez", "Solicitud", "10/10/2026")
-    cod2 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+    cod2 = registrar_expediente(codigos, dnis, nombres, asuntos, fechas, estados,
                                 "87654321", "Luis Rojas", "Reclamo", "11/10/2026")
-    print("Codigos generados:", cod1, cod2)
-    print(codigos)
-    print(dnis)
-    print(nombres)
-    print(asuntos)
-    print(fechas)
-
-    # El codigo siempre sigue al numero mas alto, aunque la lista este desordenada
-    print("Con lista desordenada:", generar_codigo(["EXP-005", "EXP-002"]))  # EXP-006
-    print("Con lista vacia:", generar_codigo([]))                            # EXP-001
+    print("Codigos generados:", cod1, cod2)   # EXP-001 EXP-002
+    print(estados)                            # ["Pendiente", "Pendiente"]
+    print("Lista vacia:", generar_codigo([]))                   # EXP-001
+    print("Con dos expedientes:", generar_codigo(["EXP-001", "EXP-002"]))  # EXP-003
+    print("Si el codigo ya existe:", generar_codigo(["EXP-002"]))          # EXP-003
