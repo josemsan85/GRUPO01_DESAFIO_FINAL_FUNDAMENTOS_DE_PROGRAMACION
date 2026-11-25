@@ -19,3 +19,5 @@ EXP-018|68281295|Miguel Perez|Reclamo por demora en tramite|11/09/2026
 EXP-019|74315788|Miguel Romero|Solicitud de constancia de estudios|19/08/2026
 EXP-020|36821744|Carlos Vargas|Solicitud de beca|17/09/2026
 EXP-021|12345678|rrrrr|qqqqq|12/01/2025
+EXP-022|71279180|hhhhh|josejsajs|25/12/2004
+EXP-023|12345678|abhs|bahsaaa|25/12/2004
