@@ -157,13 +157,20 @@ entradaBusquedaExpediente.grid(row=0, column=1, padx = 5, pady=5)
 
 #el primero es la carga
 def opcibus(codigoFramenput, codigos, dnis, nombres, asuntos, fechas):
+
+     
+    
     print("\n--- Buscar expediente ---")
     if len(codigos) == 0:
+        #messagebox.showerror("Asunto invalido", "No se ha encontrado expediente'|'.")
+        #return
         print("No hay expedientes registrados.")
         return
     #codigoxxxx = input("Codigo a buscar (ej. EXP-001): ").strip().upper()
     pos = buscar_por_codigo(codigos, codigoFramenput)
     if pos == -1:
+        messagebox.showerror("Asunto invalido", "No se ha encontrado expediente'|'.")
+        return
         print("No se encontro el expediente", codigoFramenput)
     else:
         print("\nExpediente encontrado:")
@@ -179,7 +186,7 @@ def opcibus(codigoFramenput, codigos, dnis, nombres, asuntos, fechas):
         resultadoNombre.config(text = nombres[pos])
 
         print("  Asunto:", asuntos[pos])
-        resultadoAsunto.config(text = nombres[pos])
+        resultadoAsunto.config(text = asuntos[pos])
 
 
         print("  Fecha: ", fechas[pos])
@@ -212,24 +219,24 @@ btnBusqueda.grid(row=2, column=1, padx = 15, pady=5)
 labelsMuestra(buscarExpFrame2)
 
 resultadoDNI = tk.Label(buscarExpFrame2, text="")
-resultadoDNI.config(text="DNI22")
+resultadoDNI.config(text="vacio")
 resultadoDNI.grid(row=0, column=1, padx = 15, pady=5)
 
 resultadoNombre = tk.Label(buscarExpFrame2, text="")
-resultadoNombre.config(text="Nombre222")
+resultadoNombre.config(text="vacio")
 resultadoNombre.grid(row=1, column=1, padx = 15, pady=5)
 
 resultadoAsunto = tk.Label(buscarExpFrame2, text="")
-resultadoAsunto.config(text="Asunto22")
+resultadoAsunto.config(text="vacio")
 resultadoAsunto.grid(row=2, column=1, padx = 15, pady=5)
 
 resultadoFecha = tk.Label(buscarExpFrame2, text="")
-resultadoFecha.config(text="Fecha222")
+resultadoFecha.config(text="vacio")
 resultadoFecha.grid(row=3, column=1, padx = 15, pady=5)
 
 resultadoExp = tk.Label(buscarExpFrame2, text="")
-resultadoExp.config(text="Fecha222")
-resultadoExp.grid(row=4, column=1, padx = 15, pady=5)
+resultadoExp.config(text="vacio")
+resultadoExp.grid(row=4, column=0, padx = 15, pady=5)
 
 def retrocede ():
     buscarExpFrame2.grid_remove()
