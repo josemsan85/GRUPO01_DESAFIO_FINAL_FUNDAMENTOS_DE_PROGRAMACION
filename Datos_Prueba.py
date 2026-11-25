@@ -25,12 +25,13 @@ def generar_fecha():
     mes = random.randint(8, 10)
     return str(dia).zfill(2) + "/" + str(mes).zfill(2) + "/2026"
 def generar_datos():
-    """Crea las 5 listas con CANTIDAD expedientes ficticios."""
+    """Crea las 6 listas con CANTIDAD expedientes ficticios."""
     codigos = []
     dnis = []
     nombres = []
     asuntos = []
     fechas = []
+    estados = []
     # Los numeros de codigo salen desordenados a proposito,
     # asi en la demo se nota la opcion "Ordenar por codigo".
     numeros = list(range(1, CANTIDAD + 1))
@@ -43,13 +44,14 @@ def generar_datos():
         nombres.append(primer_nombre + " " + random.choice(lista_ape_paterno))
         asuntos.append(random.choice(lista_asuntos))
         fechas.append(generar_fecha())
+        estados.append("Pendiente")
 
-    return codigos, dnis, nombres, asuntos, fechas
+    return codigos, dnis, nombres, asuntos, fechas, estados
 
 if __name__ == "__main__":
     from archivos import guardar_datos
 
     random.seed(2026)  # misma salida cada vez que se ejecuta
-    codigos, dnis, nombres, asuntos, fechas = generar_datos()
-    guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres, asuntos, fechas)
+    codigos, dnis, nombres, asuntos, fechas, estados = generar_datos()
+    guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres, asuntos, fechas, estados)
     print("Se generaron", len(codigos), "expedientes en", RUTA_ARCHIVO)
