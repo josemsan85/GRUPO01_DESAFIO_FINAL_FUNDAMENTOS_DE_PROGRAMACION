@@ -295,7 +295,7 @@ def muestraElEstado():
         print("No hay expedientes registrados.")
         return
      ordenar_por_codigo(codigos, dnis, nombres, asuntos, fechas)
-     messagebox.showerror("Asunto Has ordenado", "Has ordenado los archivos de menor a mayor")
+     messagebox.showinfo("Asunto Has ordenado", "Has ordenado los archivos de menor a mayor")
      return
      print("Expedientes ordenados por codigo (de menor a mayor).")
   
@@ -303,6 +303,7 @@ def muestraElEstado():
     #resultadoOpera.config(text=f"resultado: {resultado}")
     
 botoncito = tk.Button(framesOpci, text="Realizar", command=muestraElEstado)
+
 
 botoncito.grid(row=1, column=0, pady=10)
 """
@@ -373,7 +374,7 @@ def opcion_buscar(codigos, dnis, nombres, asuntos, fechas):
 def opcion_ordenar(codigos, dnis, nombres, asuntos, fechas):
     print("\n--- Ordenar expedientes ---")
     if len(codigos) == 0:
-        print("No hay expedientes registrados.")
+        print("No hay expedientes registrados en esta busqueda.")
         return
     ordenar_por_codigo(codigos, dnis, nombres, asuntos, fechas)
     print("Expedientes ordenados por codigo (de menor a mayor).")
