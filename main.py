@@ -9,6 +9,7 @@ from validaciones import (validar_dni, validar_nombre,
                           validar_asunto, validar_fecha)
 from registro import registrar_expediente
 from busqueda_orden import buscar_por_codigo, ordenar_por_codigo
+from busqueda_orden import buscar_coincidencias, ordenar_por_fecha
 from archivos import guardar_datos, cargar_datos 
 #nuevo Commitsssss
 #otro nuevoComiits 22:22
@@ -257,6 +258,8 @@ def mostrar_menu():
     print("3. Ordenar expedientes por codigo")
     print("4. Listas expedientes")
     print("5. Guardar datos")
+    print("6. Buscar por coincidencia")
+    print("7. Ordenar expedientes por fecha")
     print("0. Salir")
 def pausar():
     input("\nPresiona ENTER para continuar...")
@@ -321,6 +324,47 @@ def opcion_listar(codigos, dnis, nombres, asuntos, fechas):
               + cortar(nombres[i], 20).ljust(22)
               + cortar(asuntos[i], 26).ljust(28) + fechas[i])
     print("\nTotal:", len(codigos), "expediente(s)")
+def opcion_buscar_coincidencias(codigos, dnis, nombres, asuntos, fechas):
+    print("\n--- Buscar por coincidencia ---")
+    if len(codigos) == 0:
+        print("No hay expedientes registrados.")
+        return
+    print("Buscar en: 1. Codigo  2. DNI  3. Nombre  4. Asunto  5. Fecha")
+    campo = input("Elige el campo: ").strip()
+    if campo == "1":
+        lista = codigos
+    elif campo == "2":
+        lista = dnis
+    elif campo == "3":
+        lista = nombres
+    elif campo == "4":
+        lista = asuntos
+    elif campo == "5":
+        lista = fechas
+        print("(En fecha puedes buscar por mes y anio, ej. 09/2026)")
+    else:
+        print("Campo invalido.")
+        return
+    texto = input("Texto a buscar: ").strip()
+    posiciones = buscar_coincidencias(lista, texto)
+    if len(posiciones) == 0:
+        print("No se encontraron coincidencias.")
+        return
+    print("\n" + "CODIGO".ljust(10) + "DNI".ljust(10) + "NOMBRE".ljust(22)
+          + "ASUNTO".ljust(28) + "FECHA")
+    print("-" * 80)
+    for i in posiciones:
+        print(codigos[i].ljust(10) + dnis[i].ljust(10)
+              + cortar(nombres[i], 20).ljust(22)
+              + cortar(asuntos[i], 26).ljust(28) + fechas[i])
+    print("\nTotal:", len(posiciones), "coincidencia(s)")
+def opcion_ordenar_fecha(codigos, dnis, nombres, asuntos, fechas):
+    print("\n--- Ordenar expedientes por fecha ---")
+    if len(codigos) == 0:
+        print("No hay expedientes registrados.")
+        return
+    ordenar_por_fecha(codigos, dnis, nombres, asuntos, fechas)
+    print("Expedientes ordenados por fecha (del mas antiguo al mas reciente).")
 def main():
     codigos, dnis, nombres, asuntos, fechas = cargar_datos(RUTA_ARCHIVO)
     print("Bienvenido a la Mesa de Partes Digital")
@@ -346,6 +390,10 @@ def main():
             guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres,
                           asuntos, fechas)
             print("Datos guardados.")
+        elif opcion == 6:
+            opcion_buscar_coincidencias(codigos, dnis, nombres, asuntos, fechas)
+        elif opcion == 7:
+            opcion_ordenar_fecha(codigos, dnis, nombres, asuntos, fechas)
         elif opcion == 0:
             respuesta = input("Seguro que deseas salir? (s/n): ").strip().lower()
             if respuesta == "s":
