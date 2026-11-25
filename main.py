@@ -249,7 +249,74 @@ btnAtras.grid(row=4, column=1, padx = 15, pady=5)
 #----------------Fin de busquea expediente---------
 
 #-----------------Listar Expdeientes-------------
+tk.Label(listarExpedientesFrame, text="Lista de expedientes").grid(
+    row=0, column=0, columnspan=2, padx=5, pady=5
+)
+
+columnas_exp = ("Codigo", "DNI", "Nombre", "Asunto", "Fecha")
+tabla_expedientes = ttk.Treeview(
+    listarExpedientesFrame, columns=columnas_exp, show="headings", height=6
+)
+for col in columnas_exp:
+    tabla_expedientes.heading(col, text=col)
+    tabla_expedientes.column(col, width=65)
+tabla_expedientes.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
+
+lbl_total_exp = tk.Label(listarExpedientesFrame, text="Total: 0")
+lbl_total_exp.grid(row=2, column=0, columnspan=2, padx=5, pady=2)
+
+
+def mostrar_lista_expedientes():
+    for item in tabla_expedientes.get_children():
+        tabla_expedientes.delete(item)
+    for i in range(len(codigos)):
+        tabla_expedientes.insert(
+            "",
+            tk.END,
+            values=(codigos[i], dnis[i], nombres[i], asuntos[i], fechas[i]),
+        )
+    lbl_total_exp.config(text=f"Total: {len(codigos)}")
+
+
+def regresar_desde_listar():
+    listarExpedientesFrame.grid_remove()
+    framesOpci.grid(row=2, column=0, columnspan=2, pady=5)
+
+
+tk.Button(listarExpedientesFrame, text="Actualizar", command=mostrar_lista_expedientes).grid(
+    row=3, column=0, padx=5, pady=5
+)
+tk.Button(listarExpedientesFrame, text="Atras", command=regresar_desde_listar).grid(
+    row=3, column=1, padx=5, pady=5
+)
 #-----------------Fin de listas expedientes------
+
+#-----------------Guardar Datos------------------
+tk.Label(guardaDatosFrame, text="Guardar expedientes en archivo").grid(
+    row=0, column=0, columnspan=2, padx=5, pady=5
+)
+lbl_guardado_info = tk.Label(guardaDatosFrame, text="")
+lbl_guardado_info.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
+
+
+def guardar_datos_gui():
+    guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres, asuntos, fechas)
+    lbl_guardado_info.config(text=f"Guardados: {len(codigos)} expediente(s)")
+    messagebox.showinfo("Guardar datos", "Datos guardados correctamente.")
+
+
+def regresar_desde_guardar():
+    guardaDatosFrame.grid_remove()
+    framesOpci.grid(row=2, column=0, columnspan=2, pady=5)
+
+
+tk.Button(guardaDatosFrame, text="Guardar", command=guardar_datos_gui).grid(
+    row=2, column=0, padx=5, pady=5
+)
+tk.Button(guardaDatosFrame, text="Atras", command=regresar_desde_guardar).grid(
+    row=2, column=1, padx=5, pady=5
+)
+#-----------------Fin Guardar Datos--------------
 
 framesOpci = tk.Frame()
 framesOpci.grid(row=2, column=0, columnspan=2, pady=5)
@@ -286,6 +353,16 @@ def muestraElEstado():
      framesOpci.grid_remove()
 
      print ("a registrar")
+
+    elif(valorRegistro == "Listar expedientes"):
+     mostrar_lista_expedientes()
+     listarExpedientesFrame.grid(row=5, column=0, columnspan=2, pady=10)
+     framesOpci.grid_remove()
+
+    elif(valorRegistro == "Guardar datos"):
+     lbl_guardado_info.config(text=f"Expedientes listos: {len(codigos)}")
+     guardaDatosFrame.grid(row=5, column=0, columnspan=2, pady=10)
+     framesOpci.grid_remove()
   
     #resultadoOpera.config(f"resultado: {resultado}")
     #resultadoOpera.config(text=f"resultado: {resultado}")
