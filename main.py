@@ -123,6 +123,13 @@ def busquedaButton ():
     buscarExpFrame.grid_remove()
     buscarExpFrame2.grid(row=0, column=1, padx = 5, pady=5)
 
+def regresoPrincipal():
+      buscarExpFrame.grid_remove()
+      framesOpci.grid(row=0, column=1, columnspan=2, pady=10)
+
+btnAtras = tk.Button(buscarExpFrame, text="Atras", command=regresoPrincipal)
+btnAtras.grid(row=2, column=0, padx=5, pady=5)
+
 
 btnBusqueda = tk.Button(buscarExpFrame, text="Busqueda", command=busquedaButton)
 btnBusqueda.grid(row=2, column=1, padx = 15, pady=5)
