@@ -138,19 +138,19 @@ btnBusqueda.grid(row=2, column=1, padx = 15, pady=5)
 labelsMuestra(buscarExpFrame2)
 
 resultadoDNI = tk.Label(buscarExpFrame2, text="")
-resultadoDNI.config(text="DNI")
+resultadoDNI.config(text="DNI22")
 resultadoDNI.grid(row=0, column=1, padx = 15, pady=5)
 
 resultadoNombre = tk.Label(buscarExpFrame2, text="")
-resultadoNombre.config(text="Nombre")
+resultadoNombre.config(text="Nombre222")
 resultadoNombre.grid(row=1, column=1, padx = 15, pady=5)
 
 resultadoAsunto = tk.Label(buscarExpFrame2, text="")
-resultadoAsunto.config(text="Asunto")
+resultadoAsunto.config(text="Asunto22")
 resultadoAsunto.grid(row=2, column=1, padx = 15, pady=5)
 
 resultadoFecha = tk.Label(buscarExpFrame2, text="")
-resultadoFecha.config(text="Fecha")
+resultadoFecha.config(text="Fecha222")
 resultadoFecha.grid(row=3, column=1, padx = 15, pady=5)
 
 def retrocede ():
@@ -177,7 +177,7 @@ opciones= tk.StringVar()
 opcionesDesplegadas = ttk.Combobox(framesOpci, textvariable=opciones, 
                                    values= ["Registrar Expedientes", "Buscar Expediente", 
                                             "Ordenar Expediente por codigo", "Listar expedientes",
-                                            "Guardar datos", "Sumar"], state="readonly")
+                                            "Guardar datos", "Salida"], state="readonly")
 
 opcionesDesplegadas.current(0)
 opcionesDesplegadas.grid(row=0, column=0, pady=10)
