@@ -21,3 +21,5 @@ EXP-020|36821744|Carlos Vargas|Solicitud de beca|17/09/2026
 EXP-021|12345678|rrrrr|qqqqq|12/01/2025
 EXP-022|71279180|hhhhh|josejsajs|25/12/2004
 EXP-023|12345678|abhs|bahsaaa|25/12/2004
+EXP-024|12345678|jk jk jk|pipipi|11/12/2026
+EXP-025|87654321|yu yu io|qqqww|14/02/2026

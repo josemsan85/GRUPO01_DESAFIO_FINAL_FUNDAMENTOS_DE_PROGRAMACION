@@ -149,14 +149,53 @@ btnAtras.grid(row=4, column=1, padx=5, pady=5)
 
 
 #-----------------FinRegistro expediente-----------
+
 #-----------------Buscar Expediente--------
 tk.Label(buscarExpFrame , text="Busca Por Expediente").grid (row=0, column=0, padx = 5, pady=5)
 entradaBusquedaExpediente = tk.Entry(buscarExpFrame)
 entradaBusquedaExpediente.grid(row=0, column=1, padx = 5, pady=5)
 
+#el primero es la carga
+def opcibus(codigoFramenput, codigos, dnis, nombres, asuntos, fechas):
+    print("\n--- Buscar expediente ---")
+    if len(codigos) == 0:
+        print("No hay expedientes registrados.")
+        return
+    #codigoxxxx = input("Codigo a buscar (ej. EXP-001): ").strip().upper()
+    pos = buscar_por_codigo(codigos, codigoFramenput)
+    if pos == -1:
+        print("No se encontro el expediente", codigoFramenput)
+    else:
+        print("\nExpediente encontrado:")
+        print("  Codigo:", codigos[pos])
+        resultadoExp.config(text=codigos[pos])
+       # resultadoExp.config(text=codigos[pos])
+
+        print("  DNI:   ", dnis[pos])
+        resultadoDNI.config(text=dnis[pos])
+        #resultadoDNI.config(text=dnis[pos])
+
+        print("  Nombre:", nombres[pos])
+        resultadoNombre.config(text = nombres[pos])
+
+        print("  Asunto:", asuntos[pos])
+        resultadoAsunto.config(text = nombres[pos])
+
+
+        print("  Fecha: ", fechas[pos])
+        resultadoFecha.config(text=fechas[pos])
+
+
+def busqueExpMetod():
+    #codigos, dnis, nombres, asuntos, fechas = cargar_datos(RUTA_ARCHIVO)
+    expi = entradaBusquedaExpediente.get().strip()
+    opcibus(expi,codigos, dnis, nombres, asuntos, fechas)
+    
 def busquedaButton ():
+    busqueExpMetod()
     buscarExpFrame.grid_remove()
     buscarExpFrame2.grid(row=0, column=1, padx = 5, pady=5)
+   # opcion_buscar(entradaBusquedaExpediente) 
 
 def regresoPrincipal():
       buscarExpFrame.grid_remove()
@@ -188,16 +227,17 @@ resultadoFecha = tk.Label(buscarExpFrame2, text="")
 resultadoFecha.config(text="Fecha222")
 resultadoFecha.grid(row=3, column=1, padx = 15, pady=5)
 
+resultadoExp = tk.Label(buscarExpFrame2, text="")
+resultadoExp.config(text="Fecha222")
+resultadoExp.grid(row=4, column=1, padx = 15, pady=5)
+
 def retrocede ():
     buscarExpFrame2.grid_remove()
-    buscarExpFrame.grid(row=4, column=1, padx=5, pady=5)
+    buscarExpFrame.grid(row=5, column=1, padx=5, pady=5)
 
 
 btnAtras = tk.Button(buscarExpFrame2, text="Atras", command=retrocede)
 btnAtras.grid(row=4, column=1, padx = 15, pady=5)
-
-
-
 
 #----------------Fin de busquea expediente---------
 
@@ -238,17 +278,11 @@ def muestraElEstado():
      buscarExpFrame.grid(row=5, column=0, columnspan=2, pady=10)
      framesOpci.grid_remove()
 
-
-     
      print ("a registrar")
-
-   
+  
     #resultadoOpera.config(f"resultado: {resultado}")
     #resultadoOpera.config(text=f"resultado: {resultado}")
     
-
-
-
 botoncito = tk.Button(framesOpci, text="Realizar", command=muestraElEstado)
 
 botoncito.grid(row=1, column=0, pady=10)
@@ -295,6 +329,9 @@ def opcion_registrar(codigos, dnis, nombres, asuntos, fechas):
     codigo = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
                                   dni, nombre, asunto, fecha)
     print("\nExpediente registrado con codigo:", codigo)
+
+    #el parametro codigo es que ya viene precargado y se tiene que 
+    #comparar con el codigoQue es inpput
 def opcion_buscar(codigos, dnis, nombres, asuntos, fechas):
     print("\n--- Buscar expediente ---")
     if len(codigos) == 0:
@@ -307,7 +344,12 @@ def opcion_buscar(codigos, dnis, nombres, asuntos, fechas):
     else:
         print("\nExpediente encontrado:")
         print("  Codigo:", codigos[pos])
+       # resultadoExp.config(text=codigos[pos])
+
         print("  DNI:   ", dnis[pos])
+        resultadoDNI.config(text="DNI22")
+        #resultadoDNI.config(text=dnis[pos])
+
         print("  Nombre:", nombres[pos])
         print("  Asunto:", asuntos[pos])
         print("  Fecha: ", fechas[pos])
