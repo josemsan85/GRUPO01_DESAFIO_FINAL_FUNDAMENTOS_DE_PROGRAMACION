@@ -2,6 +2,7 @@ import os
 #comiteado a las 22:34
 import tkinter as tk
 from tkinter import ttk 
+from tkinter import messagebox
 from enum import Enum
 #from datos datos datos datos
 from validaciones import (validar_dni, validar_nombre,
@@ -23,6 +24,9 @@ from archivos import guardar_datos, cargar_datos
 CARPETA = os.path.dirname(os.path.abspath(__file__))
 RUTA_ARCHIVO = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             "datos", "expedientes.txt")
+
+#datos del archivo (secargan una vez al abrir)
+codigos, dnis, nombres, asuntos, fechas = cargar_datos(RUTA_ARCHIVO)
 
 class Estados(Enum):
     nombre =1
@@ -96,8 +100,38 @@ entradaFecha = tk.Entry(registroFrame)
 entradaFecha.grid(row=3, column=1, padx = 5, pady=5)
 
 
+def guardarRegistro():
+    """Valida los 4 campos, registra el expediente y lo guarda en el archivo."""
+    dni = entradaDNI.get().strip()
+    nombre = entradaNombre.get().strip()
+    asunto = entradaAsuntos.get().strip()
+    fecha = entradaFecha.get().strip()
+
+    if not validar_dni(dni):
+        messagebox.showerror("DNI invalido", "El DNI debe tener exactamente 8 digitos.")
+        return
+    if not validar_nombre(nombre):
+        messagebox.showerror("Nombre invalido", "Solo letras y espacios, minimo 3 caracteres.")
+        return
+    if not validar_asunto(asunto):
+        messagebox.showerror("Asunto invalido", "Minimo 5 caracteres y sin el simbolo '|'.")
+        return
+    if not validar_fecha(fecha):
+        messagebox.showerror("Fecha invalida", "Usa el formato DD/MM/AAAA con una fecha real.")
+        return
+
+    codigo = registrar_expediente(codigos, dnis, nombres, asuntos, fechas,
+                                  dni, nombre, asunto, fecha)
+    guardar_datos(RUTA_ARCHIVO, codigos, dnis, nombres, asuntos, fechas)
+
+    for caja in (entradaDNI, entradaNombre, entradaAsuntos, entradaFecha):
+        caja.delete(0, tk.END)
+    messagebox.showinfo("Registro exitoso", "Expediente registrado con codigo " + codigo)
+
+
 def consultax ():
 
+    guardarRegistro()
     buscarExpFrame.grid_remove()
     registroFrame.grid(row=5, column=0, columnspan=2, pady=10)
     #btnRegreso = tk.Button()
@@ -221,7 +255,7 @@ def mostrar_menu():
     print("1. Registrar expediente")
     print("2. Buscar expediente por codigo")
     print("3. Ordenar expedientes por codigo")
-    print("4. Listar expedientes")
+    print("4. Listas expedientes")
     print("5. Guardar datos")
     print("0. Salir")
 def pausar():
