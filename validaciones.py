@@ -122,3 +122,38 @@ if __name__ == "__main__":
     probar("10-10-2026 (guiones)", validar_fecha("10-10-2026"), False)
     probar("10/10/26 (año corto)", validar_fecha("10/10/26"), False)
     probar("Fecha vacia", validar_fecha(""), False)
+
+
+
+# ===== Validaciones agregadas para HU-02 (tramites) =====
+
+TIPOS_VALIDOS = ["Solicitud", "Reclamo", "Consulta", "Denuncia"]
+ESTADOS_VALIDOS = ["Pendiente", "En proceso", "Atendido", "Archivado"]
+
+
+def validar_correo(correo):
+    """Correo basico: un solo '@', texto antes y despues, un punto en el
+    dominio, sin espacios y sin el simbolo '|' (separador del archivo)."""
+    correo = correo.strip()
+    if not validar_no_vacio(correo):
+        return False
+    if " " in correo or "|" in correo:
+        return False
+    if correo.count("@") != 1:
+        return False
+    usuario, dominio = correo.split("@")
+    if len(usuario) == 0 or "." not in dominio:
+        return False
+    if dominio.startswith(".") or dominio.endswith("."):
+        return False
+    return True
+
+
+def validar_tipo(tipo):
+    """El tipo de tramite debe ser uno de TIPOS_VALIDOS."""
+    return tipo in TIPOS_VALIDOS
+
+
+def validar_estado(estado):
+    """El estado debe ser uno de ESTADOS_VALIDOS."""
+    return estado in ESTADOS_VALIDOS
