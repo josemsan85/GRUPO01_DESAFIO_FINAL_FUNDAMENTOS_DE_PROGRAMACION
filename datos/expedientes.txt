@@ -1,20 +1,21 @@
-EXP-006|24862807|Carlos Quispe|Solicitud de beca|01/10/2026
-EXP-003|75805171|Rosa Huaman|Pedido de informacion publica|09/09/2026
 EXP-001|57866880|Jorge Romero|Reclamo por cobro indebido|24/09/2026
 EXP-002|22034628|Miguel Romero|Reclamo por demora en tramite|10/09/2026
-EXP-014|28909714|Carmen Ramos|Solicitud de constancia de estudios|28/10/2026
-EXP-005|59505484|Rosa Vargas|Pedido de informacion publica|03/09/2026
-EXP-012|76901508|Maria Castillo|Rectificacion de datos personales|26/10/2026
-EXP-008|75905026|Jorge Romero|Reclamo por demora en tramite|28/09/2026
-EXP-019|74315788|Miguel Romero|Solicitud de constancia de estudios|19/08/2026
-EXP-007|27313932|Juan Romero|Reclamo por cobro indebido|23/10/2026
-EXP-009|67634371|Lucia Sanchez|Solicitud de beca|08/08/2026
-EXP-013|71310167|Lucia Romero|Reclamo por demora en tramite|18/09/2026
-EXP-010|51289034|Miguel Romero|Solicitud de beca|26/09/2026
-EXP-016|68125246|Ana Ramos|Reclamo por demora en tramite|01/08/2026
-EXP-015|30111687|Carmen Vargas|Rectificacion de datos personales|16/09/2026
-EXP-020|36821744|Carlos Vargas|Solicitud de beca|17/09/2026
-EXP-018|68281295|Miguel Perez|Reclamo por demora en tramite|11/09/2026
-EXP-017|23203533|Lucia Romero|Reclamo por demora en tramite|15/08/2026
-EXP-011|67146759|Lucia Quispe|Reclamo por demora en tramite|16/09/2026
+EXP-003|75805171|Rosa Huaman|Pedido de informacion publica|09/09/2026
 EXP-004|22973827|Ana Castillo|Solicitud de licencia|15/08/2026
+EXP-005|59505484|Rosa Vargas|Pedido de informacion publica|03/09/2026
+EXP-006|24862807|Carlos Quispe|Solicitud de beca|01/10/2026
+EXP-007|27313932|Juan Romero|Reclamo por cobro indebido|23/10/2026
+EXP-008|75905026|Jorge Romero|Reclamo por demora en tramite|28/09/2026
+EXP-009|67634371|Lucia Sanchez|Solicitud de beca|08/08/2026
+EXP-010|51289034|Miguel Romero|Solicitud de beca|26/09/2026
+EXP-011|67146759|Lucia Quispe|Reclamo por demora en tramite|16/09/2026
+EXP-012|76901508|Maria Castillo|Rectificacion de datos personales|26/10/2026
+EXP-013|71310167|Lucia Romero|Reclamo por demora en tramite|18/09/2026
+EXP-014|28909714|Carmen Ramos|Solicitud de constancia de estudios|28/10/2026
+EXP-015|30111687|Carmen Vargas|Rectificacion de datos personales|16/09/2026
+EXP-016|68125246|Ana Ramos|Reclamo por demora en tramite|01/08/2026
+EXP-017|23203533|Lucia Romero|Reclamo por demora en tramite|15/08/2026
+EXP-018|68281295|Miguel Perez|Reclamo por demora en tramite|11/09/2026
+EXP-019|74315788|Miguel Romero|Solicitud de constancia de estudios|19/08/2026
+EXP-020|36821744|Carlos Vargas|Solicitud de beca|17/09/2026
+EXP-021|12345678|rrrrr|qqqqq|12/01/2025

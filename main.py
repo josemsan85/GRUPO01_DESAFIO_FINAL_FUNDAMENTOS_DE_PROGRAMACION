@@ -1,6 +1,5 @@
 import os
 #comiteado a las 22:34
-import os
 import tkinter as tk
 from tkinter import ttk 
 from enum import Enum
@@ -43,13 +42,125 @@ ventana.geometry("350x350")
 
 #tk.Label(ventana, )
 
-tk.Label(ventana, text="primer dato").grid (row=0, column=0, padx = 5, pady=5)
-entrada1 = tk.Entry(ventana)
-entrada1.grid (row=0, column=1, padx = 5, pady=5)
+#manejo de frames de expedientes
 
-tk.Label(ventana, text="segundo dato").grid (row=1, column=0, padx = 5, pady=5)
-entrada2 = tk.Entry(ventana)
-entrada2.grid (row=1, column=1, padx = 5, pady=5)
+todosLosFrames = []
+
+registroFrame = tk.Frame(ventana)
+
+buscarExpFrame = tk.Frame(ventana)
+
+buscarExpFrame2 = tk.Frame(ventana)
+ordenarCodigoFrame = tk.Frame(ventana)
+listarExpedientesFrame = tk.Frame(ventana)
+guardaDatosFrame = tk.Frame(ventana)
+
+"""
+todosLosFrames.append(registroFrame, buscarExpFrame, 
+                      ordenarCodigoFrame,listarExpedientesFrame, 
+                      guardaDatosFrame)"""
+
+todosLosFrames.append(registroFrame)
+todosLosFrames.append(buscarExpFrame)
+todosLosFrames.append(ordenarCodigoFrame)
+todosLosFrames.append(listarExpedientesFrame)
+todosLosFrames.append(guardaDatosFrame)
+
+def apagon():
+    for abc in todosLosFrames:
+        abc.grid_remove() 
+#----------Registrar expediente----------
+
+def labelsMuestra(registroFrame):
+    tk.Label(registroFrame, text="DNI").grid (row=0, column=0, padx = 5, pady=5)
+    tk.Label(registroFrame, text="Nombres Completos").grid (row=1, column=0, padx = 5, pady=5)
+    tk.Label(registroFrame, text="Asuntos ").grid (row=2, column=0, padx = 5, pady=5)
+    tk.Label(registroFrame, text="Fecha").grid (row=3, column=0, padx = 5, pady=5)
+
+
+labelsMuestra(registroFrame)
+#tk.Label(registroFrame, text="DNI").grid (row=0, column=0, padx = 5, pady=5)
+entradaDNI = tk.Entry(registroFrame)
+entradaDNI.grid(row=0, column=1, padx = 5, pady=5)
+
+
+entradaNombre = tk.Entry(registroFrame)
+entradaNombre.grid(row=1, column=1, padx = 5, pady=5)
+
+
+entradaAsuntos = tk.Entry(registroFrame)
+entradaAsuntos.grid(row=2, column=1, padx = 5, pady=5)
+
+
+entradaFecha = tk.Entry(registroFrame)
+entradaFecha.grid(row=3, column=1, padx = 5, pady=5)
+
+
+def consultax ():
+
+    buscarExpFrame.grid_remove()
+    registroFrame.grid(row=5, column=0, columnspan=2, pady=10)
+    #btnRegreso = tk.Button()
+
+btnBusqueda = tk.Button(registroFrame, text="Registrar", command=consultax)
+btnBusqueda.grid(row=4, column=0, padx=5, pady=5)
+
+def regresox():
+      registroFrame.grid_remove()
+      framesOpci.grid(row=5, column=0, columnspan=2, pady=10)
+
+btnAtras = tk.Button(registroFrame, text="Atras", command=regresox)
+btnAtras.grid(row=4, column=1, padx=5, pady=5)
+
+
+#-----------------FinRegistro expediente-----------
+#-----------------Buscar Expediente--------
+tk.Label(buscarExpFrame , text="Busca Por Expediente").grid (row=0, column=0, padx = 5, pady=5)
+entradaBusquedaExpediente = tk.Entry(buscarExpFrame)
+entradaBusquedaExpediente.grid(row=0, column=1, padx = 5, pady=5)
+
+def busquedaButton ():
+    buscarExpFrame.grid_remove()
+    buscarExpFrame2.grid(row=0, column=1, padx = 5, pady=5)
+
+
+btnBusqueda = tk.Button(buscarExpFrame, text="Busqueda", command=busquedaButton)
+btnBusqueda.grid(row=2, column=1, padx = 15, pady=5)
+
+
+labelsMuestra(buscarExpFrame2)
+
+resultadoDNI = tk.Label(buscarExpFrame2, text="")
+resultadoDNI.config(text="DNI")
+resultadoDNI.grid(row=0, column=1, padx = 15, pady=5)
+
+resultadoNombre = tk.Label(buscarExpFrame2, text="")
+resultadoNombre.config(text="Nombre")
+resultadoNombre.grid(row=1, column=1, padx = 15, pady=5)
+
+resultadoAsunto = tk.Label(buscarExpFrame2, text="")
+resultadoAsunto.config(text="Asunto")
+resultadoAsunto.grid(row=2, column=1, padx = 15, pady=5)
+
+resultadoFecha = tk.Label(buscarExpFrame2, text="")
+resultadoFecha.config(text="Fecha")
+resultadoFecha.grid(row=3, column=1, padx = 15, pady=5)
+
+def retrocede ():
+    buscarExpFrame2.grid_remove()
+    buscarExpFrame.grid(row=4, column=1, padx=5, pady=5)
+
+
+btnAtras = tk.Button(buscarExpFrame2, text="Atras", command=retrocede)
+btnAtras.grid(row=4, column=1, padx = 15, pady=5)
+
+
+
+
+#----------------Fin de busquea expediente---------
+
+#-----------------Listar Expdeientes-------------
+#-----------------Fin de listas expedientes------
 
 framesOpci = tk.Frame()
 framesOpci.grid(row=2, column=0, columnspan=2, pady=5)
@@ -68,27 +179,41 @@ opcionesDesplegadas.current(0)
 
 def muestraElEstado():
 
-    a = int (entrada1.get())
-    b = int (entrada2.get())
+    #a = int (entrada1.get())
+    #b = int (entrada2.get())
 
-    abcd = opcionesDesplegadas.get()
+    valorRegistro = opcionesDesplegadas.get()
+    
+    
+    if (valorRegistro == "Registrar Expedientes"):
+    # framesOpci.pack_forget()
+     
+     registroFrame.grid(row=5, column=0, columnspan=2, pady=10)
+     framesOpci.grid_remove()
+     #framesOpci.pack_forget()
+     
+    elif(valorRegistro == "Buscar Expediente"):
+     buscarExpFrame.grid(row=5, column=0, columnspan=2, pady=10)
+     framesOpci.grid_remove()
 
-    if (abcd == "Sumar"):
-        resultado = a+b
-        print ("debes estar sumando")
 
-    #print(abcd)
-    #print (abcd.value)
+     
+     print ("a registrar")
+
+   
     #resultadoOpera.config(f"resultado: {resultado}")
-    resultadoOpera.config(text=f"resultado: {resultado}")
+    #resultadoOpera.config(text=f"resultado: {resultado}")
+    
 
-botoncito = tk.Button(framesOpci, text="elige lo que quieres hacer", command=muestraElEstado)
+
+
+botoncito = tk.Button(framesOpci, text="Realizar", command=muestraElEstado)
 
 botoncito.grid(row=1, column=0, pady=10)
-
+"""
 resultadoOpera = ttk.Label(framesOpci, text="resultado")
 resultadoOpera.grid(row=2, column=0, pady=10)
-
+"""
 ventana.mainloop()
 #>>>>>>> main
 def mostrar_menu():
@@ -102,7 +227,7 @@ def mostrar_menu():
 def pausar():
     input("\nPresiona ENTER para continuar...")
 def pedir_dato(mensaje, funcion_validar, mensaje_error):
-    """Pide un dato hasta que sea valido y muestra que se esperaba."""
+    #Pide un dato hasta que sea valido y muestra que se esperaba"""
     while True:
         valor = input(mensaje).strip()
         if funcion_validar(valor):
