@@ -310,6 +310,7 @@ botoncito.grid(row=1, column=0, pady=10)
 resultadoOpera = ttk.Label(framesOpci, text="resultado")
 resultadoOpera.grid(row=2, column=0, pady=10)
 """
+#commits REALIZADO A LAS 01:20  
 ventana.mainloop()
 #>>>>>>> main
 def mostrar_menu():
