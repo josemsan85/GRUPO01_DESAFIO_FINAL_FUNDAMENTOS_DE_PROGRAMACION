@@ -285,6 +285,19 @@ def muestraElEstado():
      framesOpci.grid_remove()
 
      print ("a registrar")
+
+    elif(valorRegistro == "Ordenar Expediente por codigo"):
+       #  def opcion_ordenar(codigos, dnis, nombres, asuntos, fechas):
+     print("\n--- Ordenar expedientes ---")
+     if len(codigos) == 0:
+        messagebox.showerror("Asunto invalido", "No se ha encontrado expediente'|'.")
+        return
+        print("No hay expedientes registrados.")
+        return
+     ordenar_por_codigo(codigos, dnis, nombres, asuntos, fechas)
+     messagebox.showerror("Asunto Has ordenado", "Has ordenado los archivos de menor a mayor")
+     return
+     print("Expedientes ordenados por codigo (de menor a mayor).")
   
     #resultadoOpera.config(f"resultado: {resultado}")
     #resultadoOpera.config(text=f"resultado: {resultado}")
